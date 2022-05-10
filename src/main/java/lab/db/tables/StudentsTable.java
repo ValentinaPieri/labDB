@@ -125,7 +125,7 @@ package lab.db.tables;
 
      @Override
      public boolean save(final Student student) {
-    	 final String query =  "SAVE * FROM " + TABLE_NAME + " WHO ("+ student +")";
+    	 final String query =  "SAVE FROM " + TABLE_NAME + " WHO ("+ student +")";
          try(final PreparedStatement statement = this.connection.prepareStatement(query)){
         	 statement.executeUpdate(query); //punti interrogativi della query
         	 return true;
@@ -136,7 +136,7 @@ package lab.db.tables;
 
      @Override
      public boolean delete(final Integer id) {
-    	 final String query =  "DELETE * FROM " + TABLE_NAME + " WHERE id = ?";
+    	 final String query =  "DELETE FROM " + TABLE_NAME +  "WHERE id = ?";
          try(final PreparedStatement statement = this.connection.prepareStatement(query)){
         	 statement.setInt(1, id); //punti interrogativi della query
         	 return true;
@@ -147,6 +147,12 @@ package lab.db.tables;
 
      @Override
      public boolean update(final Student student) {
-         throw new UnsupportedOperationException("TODO");
+    	 final String query =  "DELETE * FROM " + TABLE_NAME + " WHERE id = ?";
+         try(final PreparedStatement statement = this.connection.prepareStatement(query)){
+        	 statement.setInt(1, id); //punti interrogativi della query
+        	 return true;
+         } catch (final SQLException e) {
+        	 return false;
+           }
      }
  }
