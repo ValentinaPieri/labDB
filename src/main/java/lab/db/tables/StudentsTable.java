@@ -125,12 +125,18 @@ package lab.db.tables;
 
      @Override
      public boolean save(final Student student) {
-         throw new UnsupportedOperationException("TODO");
+    	 final String query =  "SAVE * FROM " + TABLE_NAME + " WHO ("+ student +")";
+         try(final PreparedStatement statement = this.connection.prepareStatement(query)){
+        	 statement.executeUpdate(query); //punti interrogativi della query
+        	 return true;
+         } catch (final SQLException e) {
+        	 return false;
+         }
      }
 
      @Override
      public boolean delete(final Integer id) {
-         throw new UnsupportedOperationException("TODO");
+    	 
      }
 
      @Override
