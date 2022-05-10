@@ -67,7 +67,7 @@ package lab.db.tables;
       * @return a List of all the students in the ResultSet
       */
      private List<Student> readStudentsFromResultSet(final ResultSet resultSet) {
-         // Create an empty list, then
+    	 // Create an empty list, then
          // Inside a loop you should:
          //      1. Call resultSet.next() to advance the pointer and check there are still rows to fetch
          //      2. Use the getter methods to get the value of the columns
@@ -75,6 +75,14 @@ package lab.db.tables;
          //      4. Put the student in the List
          // Then return the list with all the found students
 
+    	 ArrayList<Student> studentList = new ArrayList<Student>();
+    	 final String query = "";
+    	 try (final PreparedStatement stmt = this.connection.prepareStatement(query)){
+    		 
+    	 } catch (final SQLException e) {
+    		 return null;
+    	 }
+    	 
          // Helpful resources:
          // https://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html
          // https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html
