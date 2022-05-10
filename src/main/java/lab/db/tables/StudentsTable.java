@@ -113,7 +113,14 @@ package lab.db.tables;
 
      @Override
      public boolean dropTable() {
-    	 
+    	 try (final Statement statement = this.connection.createStatement()) {
+             statement.executeUpdate(
+                 "DROPS TABLE " + TABLE_NAME
+                 );
+             return true;
+         } catch (final SQLException e) {
+             return false;
+         }
      }
 
      @Override
