@@ -78,7 +78,7 @@ package lab.db.tables;
     	 ArrayList<Student> studentList = new ArrayList<Student>();
     	 final String query = "";
     	 try (final PreparedStatement stmt = this.connection.prepareStatement(query)){
-    		 
+    		 resultSet.next();
     	 } catch (final SQLException e) {
     		 return null;
     	 }
@@ -91,16 +91,22 @@ package lab.db.tables;
 
      @Override
      public List<Student> findAll() {
-         throw new UnsupportedOperationException("TODO");
+    	 final String query =  "SELECT * FROM " + TABLE_NAME;
+         try(final PreparedStatement statement = this.connection.prepareStatement(query)){
+        	 final ResultSet resultSet = statement.executeQuery();
+        	 return readStudentsFromResultSet(resultSet);
+         } catch (final SQLException e) {
+        	 return null; 
+         }
      }
 
      public List<Student> findByBirthday(final Date date) {
-         throw new UnsupportedOperationException("TODO");
+    	
      }
 
      @Override
      public boolean dropTable() {
-         throw new UnsupportedOperationException("TODO");
+    	 
      }
 
      @Override
