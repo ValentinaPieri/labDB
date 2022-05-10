@@ -101,7 +101,14 @@ package lab.db.tables;
      }
 
      public List<Student> findByBirthday(final Date date) {
-    	
+    	 final String query =  "SELECT * FROM " + TABLE_NAME + " WHERE date = ?";
+         try(final PreparedStatement statement = this.connection.prepareStatement(query)){
+        	 statement.setDate(1, Utils.dateToSqlDate(date));; //punti interrogativi della query
+        	 final ResultSet resultSet = statement.executeQuery();
+        	 return readStudentsFromResultSet(resultSet);
+         } catch (final SQLException e) {
+        	 return null;
+         }
      }
 
      @Override
