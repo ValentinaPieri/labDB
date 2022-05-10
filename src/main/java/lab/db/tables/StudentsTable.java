@@ -136,7 +136,13 @@ package lab.db.tables;
 
      @Override
      public boolean delete(final Integer id) {
-    	 
+    	 final String query =  "DELETE * FROM " + TABLE_NAME + " WHERE id = ?";
+         try(final PreparedStatement statement = this.connection.prepareStatement(query)){
+        	 statement.setInt(1, id); //punti interrogativi della query
+        	 return true;
+         } catch (final SQLException e) {
+        	 return false;
+         }
      }
 
      @Override
